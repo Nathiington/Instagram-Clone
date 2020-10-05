@@ -1,0 +1,166 @@
+// this code builds the top bar display and a responsive bottom navigationBar but tabs werent successfull
+
+
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoApp(
+      home: HomeScreen(),
+      theme: CupertinoThemeData(
+        primaryColor: Colors
+            .white, //change color of the BOTTOM navbar icons when selected
+        textTheme: CupertinoTextThemeData(
+          primaryColor: Colors.red,
+        ),
+      ),
+    );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoTabScaffold(
+        tabBar: CupertinoTabBar(
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.home),
+              title: Text('Home'),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.search),
+              title: Text('Explore'),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.add_circled),
+              title: Text('Upload'),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.heart),
+              title: Text('Notifications'),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.profile_circled),
+              title: Text('Profile'),
+              //_Profilescreen();
+            ),
+          ],
+        ),
+        tabBuilder: (context, i) {
+          return CupertinoTabView(builder: (context) {
+            return CupertinoPageScaffold(
+              navigationBar: CupertinoNavigationBar(
+                leading: Icon(CupertinoIcons.photo_camera),
+                middle: Text('Instagram'),
+                trailing: Icon(CupertinoIcons.mail),
+              ),
+              child: Center(),
+            );
+            // ignore: dead_code
+            if (i == 0) {
+              return HomeScreen();
+            } else if (i == 1) {
+              return ExploreScreen();
+            } else if (i == 2) {
+              return FaveScreen();
+            } else {
+              return ProfileScreen();
+            }
+          });
+        });
+  }
+}
+
+
+class ExploreScreen extends StatefulWidget {
+  @override
+  _ExploreScreenState createState() => _ExploreScreenState();
+}
+
+class _ExploreScreenState extends State<ExploreScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoTabView(builder: (context) {
+      return CupertinoPageScaffold(
+          navigationBar: CupertinoNavigationBar(
+            middle: Text('Explore'),
+          ),
+          child: Center(
+            child: Text(
+              'Explore Page ',
+             // style: CupertinoTextThemeData(context)
+            //  .textTheme
+              ),
+          ));
+    });
+  }
+}
+
+class FaveScreen extends StatefulWidget {
+  @override
+  _FaveScreenState createState() => _FaveScreenState();
+}
+
+class _FaveScreenState extends State<FaveScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
+class ProfileScreen extends StatefulWidget {
+  @override
+  _ProfileScreenState createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
+//Pop up modal
+//Question and gives you options and you select from there
+/*return showCupertinoModalPopup<void>(
+  context: context,
+  builder: (BuildContext context) {
+    return CupertinoActionSheet(
+      title: Text('Favorite Dessert'),
+      message: Text(
+          'Please select the best dessert from the options below.'),
+      actions: <Widget>[
+        CupertinoActionSheetAction(
+          child: Text('Yes'),
+          onPressed: () {
+            Text('Yes');
+          },
+        ),
+        CupertinoActionSheetAction(
+          child: Text('Maybe'),
+          onPressed: () {
+            
+          },
+        ),
+        CupertinoActionSheetAction(
+          child: Text('No'),
+          onPressed: () {
+          },
+        ),
+        CupertinoActionSheetAction(
+          isDefaultAction: true,
+          child: Text('Cancel'),
+          onPressed: () {
+          },
+        ),
+      ],
+    );
+  },
+);
+} 
+*/
