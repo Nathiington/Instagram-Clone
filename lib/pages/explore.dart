@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'Home.dart';
 
 
 class Explore extends StatefulWidget {
@@ -9,8 +10,6 @@ class Explore extends StatefulWidget {
 class _ExploreState extends State<Explore> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
-    );
+    return getStory();
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'pages/home.dart';
+import 'pages/Home.dart';
 import 'pages/noti.dart';
 import 'pages/explore.dart';
 import 'pages/profile.dart';
@@ -14,14 +14,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      //debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false,
       title: 'Instagram',
       theme: ThemeData(
+        backgroundColor: Colors.black,
         primaryColorLight: Colors.lightBlue,
         primaryColorDark: Colors.black,
         primaryColor: Colors.black,
       ),
       home: MyHomePage(),
+      
     );
   }
 }
@@ -39,28 +41,36 @@ class _MyHomePageState extends State<MyHomePage> {
       length: 5,
       initialIndex: 0,
       child: Scaffold(
+        backgroundColor: Colors.black,//Color(0xff403f3e),
         appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(CupertinoIcons.photo_camera),
-              onPressed: () {
-                Text('Camera');
-              }
-            
-            ),
+          leading:Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+                  icon:  Icon(Icons.photo_camera),
+                  onPressed: () { 
+                    Scaffold.of(context).openDrawer(); 
+                  },
+            );
+          }
+        ),
           title: Text('Insta'),
+          actions: [
+            Padding(
+                padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),               
+                child: IconButton(
+                icon: Icon(Icons.send_sharp,
+                color: Colors.white,),
+                onPressed: () { 
+                      Scaffold.of(context).openDrawer(); 
+                    },
+                ),
+              )
+        ]
         ),
         body: TabBarView(
           children: pages,
         ),
-        bottomNavigationBar: Container(
-          // decoration: BoxDecoration(
-          //   boxShadow: [
-          //     BoxShadow(
-          //       offset: Offset(10, 10)
-          //     )
-          //   ]
-          // ),
-          margin: EdgeInsets.only(bottom: 20),
+        bottomNavigationBar: Container(     
           child: new TabBar(
             tabs: [
               Tab(
@@ -79,8 +89,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 icon: Icon(CupertinoIcons.profile_circled),
               ),
             ],
-            unselectedLabelColor: Colors.black,
+            unselectedLabelColor: Colors.white,
             labelColor: Colors.blue,
+            labelStyle: TextStyle(
+              fontWeight: FontWeight.w800,
+            ) ,
             indicatorColor: Colors.transparent,
           ),
         ),
